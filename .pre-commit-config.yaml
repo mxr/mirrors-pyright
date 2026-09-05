@@ -26,7 +26,7 @@ repos:
     - types-setuptools
     - typing_extensions; python_version < '3.12'
 - repo: https://github.com/mxr/sync-typing-deps
-  rev: 827c0d0f5b5dda0644170665034006604f9eb10b  # frozen: v0.6.0
+  rev: 896a112838d434d8e607d4d636323c5914ab933f  # frozen: v0.7.0
   hooks:
   - id: sync-typing-deps
 - repo: https://github.com/pre-commit/mirrors-mypy
