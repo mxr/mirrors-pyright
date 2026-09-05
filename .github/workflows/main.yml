@@ -1,0 +1,69 @@
+name: main
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions: {}
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      project_files: ${{ steps.filter.outputs.project_files }}
+    steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+    - uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4.0.3
+      id: filter
+      with:
+        filters: |
+          project_files:
+            - .github/workflows/main.yml
+            - '**/*.py'
+            - '**/*.toml'
+  main-real:
+    needs: [changes]
+    if: needs.changes.outputs.project_files == 'true'
+    uses: asottile/workflows/.github/workflows/tox.yml@75fa946a6d3d763b75b3a6669c18dc4d1822e939 # v1.11.1
+    with:
+      env: '["py311", "py312", "py313", "py314", "py315"]'
+  main:
+    needs: [changes, main-real]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+    - env:
+        PROJECT_FILES: ${{ needs.changes.outputs.project_files }}
+        MAIN_REAL_RESULT: ${{ needs.main-real.result }}
+      run: |
+        if [ "$PROJECT_FILES" != "true" ]; then
+          exit 0
+        fi
+        if [ "$MAIN_REAL_RESULT" != "success" ]; then
+          exit 1
+        fi
+  main-win-real:
+    needs: [changes]
+    if: needs.changes.outputs.project_files == 'true'
+    uses: asottile/workflows/.github/workflows/tox.yml@75fa946a6d3d763b75b3a6669c18dc4d1822e939 # v1.11.1
+    with:
+      env: '["py312"]'
+      os: windows-latest
+  main-win:
+    needs: [changes, main-win-real]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+    - env:
+        PROJECT_FILES: ${{ needs.changes.outputs.project_files }}
+        MAIN_WIN_REAL_RESULT: ${{ needs.main-win-real.result }}
+      run: |
+        if [ "$PROJECT_FILES" != "true" ]; then
+          exit 0
+        fi
+        if [ "$MAIN_WIN_REAL_RESULT" != "success" ]; then
+          exit 1
+        fi

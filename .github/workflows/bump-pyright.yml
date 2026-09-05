@@ -1,0 +1,45 @@
+name: bump-pyright
+
+on:
+  schedule:
+  - cron: 15 8 * * *
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+    - name: Check for new pyright version
+      id: check
+      run: |
+        current="$(python3 -c "import re; print(re.search(r'__version__ = \"(.+)\"', open('mirrors_pyright/__init__.py').read())[1])")"
+        latest="$(curl -sSf https://registry.npmjs.org/pyright/latest | python3 -c "import json, sys; print(json.load(sys.stdin)['version'])")"
+        echo "current=$current" >> "$GITHUB_OUTPUT"
+        echo "latest=$latest" >> "$GITHUB_OUTPUT"
+        if [ "$current" = "$latest" ]; then
+          echo "new=false" >> "$GITHUB_OUTPUT"
+        else
+          echo "new=true" >> "$GITHUB_OUTPUT"
+        fi
+    - name: Bump version, tag, and push
+      if: steps.check.outputs.new == 'true'
+      env:
+        CURRENT: ${{ steps.check.outputs.current }}
+        LATEST: ${{ steps.check.outputs.latest }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        sed -i "s/__version__ = \"$CURRENT\"/__version__ = \"$LATEST\"/" mirrors_pyright/__init__.py
+        sed -i "s/rev: v$CURRENT/rev: v$LATEST/" README.md
+        git config user.name 'Github Actions'
+        git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+        git commit -am "pyright $LATEST"
+        git tag "v$LATEST"
+        git remote set-url origin "https://x-access-token:$GH_TOKEN@github.com/$GITHUB_REPOSITORY"
+        git push origin HEAD:refs/heads/main --tags

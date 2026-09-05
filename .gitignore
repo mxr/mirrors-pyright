@@ -1,0 +1,9 @@
+/.venv
+/build
+*.pyc
+__pycache__/
+dist/
+*.egg-info/
+mirrors_pyright/_vendor/
+.coverage
+.vscode/
