@@ -19,13 +19,11 @@ jobs:
     - name: Check for new pyright version
       id: check
       run: |
-        current="$(python3 -c "import re; print(re.search(r'__version__ = \"(.+)\"', open('mirrors_pyright/__init__.py').read())[1])")"
-        latest="$(curl -sSf https://registry.npmjs.org/pyright/latest | python3 -c "import json, sys; print(json.load(sys.stdin)['version'])")"
+        current="$(grep -oP '__version__ = "\K[^"]+' mirrors_pyright/__init__.py)"
+        latest="$(curl -sSf https://registry.npmjs.org/pyright/latest | jq -r .version)"
         echo "current=$current" >> "$GITHUB_OUTPUT"
         echo "latest=$latest" >> "$GITHUB_OUTPUT"
-        if [ "$current" = "$latest" ]; then
-          echo "new=false" >> "$GITHUB_OUTPUT"
-        else
+        if [ "$current" != "$latest" ]; then
           echo "new=true" >> "$GITHUB_OUTPUT"
         fi
     - name: Bump version, tag, and push
@@ -36,10 +34,9 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         sed -i "s/__version__ = \"$CURRENT\"/__version__ = \"$LATEST\"/" mirrors_pyright/__init__.py
-        sed -i "s/rev: v$CURRENT/rev: v$LATEST/" README.md
         git config user.name 'Github Actions'
         git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-        git commit -am "pyright $LATEST"
+        git commit mirrors_pyright/__init__.py -m "pyright $LATEST"
         git tag "v$LATEST"
         git remote set-url origin "https://x-access-token:$GH_TOKEN@github.com/$GITHUB_REPOSITORY"
         git push origin HEAD:refs/heads/main --tags
