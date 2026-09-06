@@ -34,7 +34,6 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         sed -i "s/__version__ = \"$CURRENT\"/__version__ = \"$LATEST\"/" mirrors_pyright/__init__.py
-        sed -i "s/rev: v$CURRENT/rev: v$LATEST/" README.md
         git config user.name 'Github Actions'
         git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
         git commit mirrors_pyright/__init__.py -m "pyright $LATEST"
