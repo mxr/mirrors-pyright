@@ -31,7 +31,7 @@ jobs:
       env:
         CURRENT: ${{ steps.check.outputs.current }}
         LATEST: ${{ steps.check.outputs.latest }}
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_TOKEN: ${{ secrets.MIRROR_PUSH_TOKEN }}
       run: |
         sed -i "s/__version__ = \"$CURRENT\"/__version__ = \"$LATEST\"/" mirrors_pyright/__init__.py
         git config user.name 'Github Actions'
