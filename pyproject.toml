@@ -10,7 +10,7 @@ dev = [
 ]
 
 [project]
-authors = [{name = "Max R", email = "mxr@users.noreply.github.com"}]
+authors = [{ name = "Max R", email = "mxr@users.noreply.github.com" }]
 classifiers = [
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3 :: Only",
@@ -66,7 +66,7 @@ force-single-line = true
 required-imports = ["from __future__ import annotations"]
 
 [tool.setuptools.dynamic]
-version = {attr = "mirrors_pyright.__version__"}
+version = { attr = "mirrors_pyright.__version__" }
 
 [tool.setuptools.package-data]
 mirrors_pyright = ["_vendor/**/*", "py.typed"]
