@@ -10,7 +10,7 @@ For pyright: see https://github.com/microsoft/pyright
 
 Wrappers such as [`pyright-python`](https://github.com/RobertCraigie/pyright-python) install `node` and `pyright` at
 runtime. This is incompatible with runners like https://pre-commit.ci which need all setup to happen during hook
-installation. Also this makes the behavior more predictable.
+installation. Also installing dependencies during runtime makes builds is generally an antipattern.
 
 Further, `pyright` is a node package, and other wrappers maintain `language: node` so you can't specify any of your
 python additional dependencies.
