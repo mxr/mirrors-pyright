@@ -4,30 +4,30 @@ default_language_version:
   python: python3.11
 repos:
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: 2eeb5678de71a00c0902cbda7105d328432f72cb  # frozen: v0.16.8
+  rev: 2eeb5678de71a00c0902cbda7105d328432f72cb
   hooks:
   - id: ruff-check
     args: [--fix]
   - id: ruff-format
 - repo: https://github.com/biomejs/pre-commit
-  rev: 221fa73eac76e0540995318b44e2efb2774af990  # frozen: v2.5.14
+  rev: 221fa73eac76e0540995318b44e2efb2774af990
   hooks:
   - id: biome-check
 - repo: https://github.com/hukkin/mdformat
-  rev: 2d496dbc18e31b83a1596685347ffe0b6041daf0  # frozen: 1.0.0
+  rev: 2d496dbc18e31b83a1596685347ffe0b6041daf0
   hooks:
   - id: mdformat
     args: [--number, --wrap, '120']
     additional_dependencies: [mdformat-gfm]
 - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
-  rev: 4380fbb73a154b5f5624794c1c78d9719ccc860f  # frozen: v2.16.0
+  rev: 4380fbb73a154b5f5624794c1c78d9719ccc860f
   hooks:
   - id: pretty-format-toml
     args: [--autofix, --trailing-commas]
   - id: pretty-format-yaml
     args: [--autofix]
 - repo: https://github.com/mxr/mirrors-pyright
-  rev: 917816f768b32cc3aabd877e48b9001e7bf1b35c  # frozen: v1.1.414
+  rev: 917816f768b32cc3aabd877e48b9001e7bf1b35c
   hooks:
   - id: pyright
     additional_dependencies:
@@ -36,7 +36,7 @@ repos:
     - types-setuptools
     - typing_extensions; python_version < '3.12'
 - repo: https://github.com/mxr/mirrors-ty
-  rev: f23ce048a17f71ab4baf56f9f1c6bc220bad155f  # frozen: v0.0.81
+  rev: f23ce048a17f71ab4baf56f9f1c6bc220bad155f
   hooks:
   - id: ty
     additional_dependencies:
@@ -45,11 +45,11 @@ repos:
     - types-setuptools
     - typing_extensions; python_version < '3.12'
 - repo: https://github.com/mxr/sync-typing-deps
-  rev: 896a112838d434d8e607d4d636323c5914ab933f  # frozen: v0.7.0
+  rev: 896a112838d434d8e607d4d636323c5914ab933f
   hooks:
   - id: sync-typing-deps
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: 7ff8d35ae36a7d2b968f2f90b4c723e292e594ee  # frozen: v2.3.1
+  rev: 7ff8d35ae36a7d2b968f2f90b4c723e292e594ee
   hooks:
   - id: mypy
     additional_dependencies:
@@ -58,7 +58,7 @@ repos:
     - types-setuptools
     - typing_extensions; python_version < '3.12'
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
+  rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c
   hooks:
   - id: check-docstring-first
   - id: check-merge-conflict
@@ -67,12 +67,12 @@ repos:
   - id: end-of-file-fixer
   - id: trailing-whitespace
 - repo: https://github.com/rhysd/actionlint
-  rev: 914e7df21a07ef503a81201c76d2b11c789d3fca  # frozen: v1.7.12
+  rev: 914e7df21a07ef503a81201c76d2b11c789d3fca
   hooks:
   - id: actionlint
     additional_dependencies: [github.com/wasilibs/go-shellcheck/cmd/shellcheck@latest]
 - repo: https://github.com/zizmorcore/zizmor-pre-commit
-  rev: fa412071e4f5d44d44f9e365f4676f9df92456a2  # frozen: v1.30.1
+  rev: fa412071e4f5d44d44f9e365f4676f9df92456a2
   hooks:
   - id: zizmor
     args: [--no-progress, --fix]
