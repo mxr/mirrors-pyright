@@ -36,7 +36,7 @@ repos:
     - types-setuptools
     - typing_extensions; python_version < '3.12'
 - repo: https://github.com/mxr/mirrors-ty
-  rev: f23ce048a17f71ab4baf56f9f1c6bc220bad155f  # frozen: v0.0.81
+  rev: 247350e02d5017e6936ece7b0c05f936c6aef207  # frozen: v0.0.82
   hooks:
   - id: ty
     additional_dependencies:
