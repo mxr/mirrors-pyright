@@ -1,6 +1,6 @@
 # pyright-pre-commit
 
-Mirror of pyright for pre-commit.
+Run pyright in pre-commit without runtime downloads.
 
 For pre-commit: see https://github.com/pre-commit/pre-commit
 
