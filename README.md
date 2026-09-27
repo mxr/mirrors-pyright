@@ -1,6 +1,6 @@
-# pyright mirror
+# pyright-pre-commit
 
-Mirror of pyright for pre-commit.
+Run pyright in pre-commit without runtime downloads.
 
 For pre-commit: see https://github.com/pre-commit/pre-commit
 
@@ -24,7 +24,7 @@ releases. `node` is pinned to an LTS (24.20.0)
 Add this to your `.pre-commit-config.yaml`:
 
 ```yaml
--   repo: https://github.com/mxr/mirrors-pyright
+-   repo: https://github.com/mxr/pyright-pre-commit
     rev: ''  # Use the sha / tag you want to point at
     hooks:
     -   id: pyright
@@ -35,7 +35,7 @@ that, override `additional_dependencies` with your dependencies. You can also au
 using the https://github.com/mxr/sync-typing-deps hook (which uses heuristics).
 
 ```yaml
--   repo: https://github.com/mxr/mirrors-pyright
+-   repo: https://github.com/mxr/pyright-pre-commit
     rev: ''  # Use the sha / tag you want to point at
     hooks:
     -   id: pyright

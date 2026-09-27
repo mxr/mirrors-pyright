@@ -6,13 +6,15 @@ from unittest.mock import patch
 
 import pytest
 
-from mirrors_pyright.__main__ import _node_bin
-from mirrors_pyright.__main__ import _vendor_dir
-from mirrors_pyright.__main__ import main
+from pyright_pre_commit.__main__ import _node_bin
+from pyright_pre_commit.__main__ import _vendor_dir
+from pyright_pre_commit.__main__ import main
 
 
 def test_vendor_dir():
-    assert _vendor_dir() == Path(__file__).parent.parent / "mirrors_pyright" / "_vendor"
+    assert (
+        _vendor_dir() == Path(__file__).parent.parent / "pyright_pre_commit" / "_vendor"
+    )
 
 
 @pytest.mark.parametrize(

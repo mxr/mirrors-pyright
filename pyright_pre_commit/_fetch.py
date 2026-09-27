@@ -28,7 +28,7 @@ def _node_platform_arch() -> tuple[str, str]:
         node_platform = "win"
     else:
         raise RuntimeError(
-            f"mirrors-pyright has no vendored Node.js build for platform {system!r}"
+            f"pyright-pre-commit has no vendored Node.js build for platform {system!r}"
         )
 
     if machine in ("x86_64", "amd64"):
@@ -37,14 +37,14 @@ def _node_platform_arch() -> tuple[str, str]:
         arch = "arm64"
     else:
         raise RuntimeError(
-            f"mirrors-pyright has no vendored Node.js build for architecture {machine!r}"
+            f"pyright-pre-commit has no vendored Node.js build for architecture {machine!r}"
         )
 
     return node_platform, arch
 
 
 def _download(url: str) -> bytes:
-    print(f"mirrors-pyright: fetching {url}", flush=True)
+    print(f"pyright-pre-commit: fetching {url}", flush=True)
     with urllib.request.urlopen(url) as resp:
         return cast("bytes", resp.read())
 

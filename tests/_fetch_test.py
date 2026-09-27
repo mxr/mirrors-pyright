@@ -10,12 +10,12 @@ from unittest.mock import patch
 
 import pytest
 
-from mirrors_pyright._fetch import NODE_VERSION
-from mirrors_pyright._fetch import _download
-from mirrors_pyright._fetch import _fetch_node
-from mirrors_pyright._fetch import _fetch_pyright
-from mirrors_pyright._fetch import _node_platform_arch
-from mirrors_pyright._fetch import fetch_vendor
+from pyright_pre_commit._fetch import NODE_VERSION
+from pyright_pre_commit._fetch import _download
+from pyright_pre_commit._fetch import _fetch_node
+from pyright_pre_commit._fetch import _fetch_pyright
+from pyright_pre_commit._fetch import _node_platform_arch
+from pyright_pre_commit._fetch import fetch_vendor
 
 
 def _tar_gz(members):
@@ -81,7 +81,7 @@ def test_download(urlopen):
     urlopen.assert_called_once_with("https://example.com")
 
 
-@patch("mirrors_pyright._fetch._download")
+@patch("pyright_pre_commit._fetch._download")
 def test_fetch_pyright(download, tmp_path):
     download.return_value = _tar_gz(
         (
@@ -108,7 +108,7 @@ def test_fetch_pyright(download, tmp_path):
         pytest.param("win", _zip, "node.exe", id="windows"),
     ),
 )
-@patch("mirrors_pyright._fetch._download")
+@patch("pyright_pre_commit._fetch._download")
 def test_fetch_node(download, tmp_path, node_platform, archive, member):
     archive_stem = f"node-v24.20.0-{node_platform}-x64"
     download.return_value = archive(((f"{archive_stem}/{member}", b"binary"),))
@@ -123,9 +123,9 @@ def test_fetch_node(download, tmp_path, node_platform, archive, member):
         assert node.stat().st_mode & 0o777 == 0o755
 
 
-@patch("mirrors_pyright._fetch._fetch_node")
-@patch("mirrors_pyright._fetch._fetch_pyright")
-@patch("mirrors_pyright._fetch._node_platform_arch")
+@patch("pyright_pre_commit._fetch._fetch_node")
+@patch("pyright_pre_commit._fetch._fetch_pyright")
+@patch("pyright_pre_commit._fetch._node_platform_arch")
 def test_fetch_vendor(node_platform_arch, fetch_pyright, fetch_node, tmp_path):
     node_platform_arch.return_value = ("darwin", "arm64")
     vendor_dir = tmp_path / "_vendor"

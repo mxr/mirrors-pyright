@@ -22,15 +22,15 @@ dynamic = ["version"]
 keywords = ["pyright", "pre-commit", "mirror", "node", "npm"]
 license = "MIT"
 license-files = ["LICENSE"]
-name = "mirrors-pyright"
+name = "pyright-pre-commit"
 readme = "README.md"
 requires-python = ">=3.11"
 
 [project.scripts]
-pyright = "mirrors_pyright.__main__:main"
+pyright = "pyright_pre_commit.__main__:main"
 
 [project.urls]
-Homepage = "https://github.com/mxr/mirrors-pyright"
+Homepage = "https://github.com/mxr/pyright-pre-commit"
 
 [tool.coverage.run]
 plugins = ["covdefaults"]
@@ -66,13 +66,13 @@ force-single-line = true
 required-imports = ["from __future__ import annotations"]
 
 [tool.setuptools.dynamic]
-version = { attr = "mirrors_pyright.__version__" }
+version = { attr = "pyright_pre_commit.__version__" }
 
 [tool.setuptools.package-data]
-mirrors_pyright = ["_vendor/**/*", "py.typed"]
+pyright_pre_commit = ["_vendor/**/*", "py.typed"]
 
 [tool.setuptools.packages.find]
-include = ["mirrors_pyright*"]
+include = ["pyright_pre_commit*"]
 
 [tool.tox]
 env_list = ["py", "pre-commit"]
