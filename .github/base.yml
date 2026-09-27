@@ -1,6 +1,4 @@
-stack: [mirror, python]
+stack: [python]
 opt:
-  mirror:
-    custom: {}
   python:
     min-version: '3.11'
