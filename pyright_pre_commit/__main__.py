@@ -27,9 +27,9 @@ def main() -> None:
     for label, path in (("Node runtime", node), ("pyright entrypoint", pyright_entry)):
         if not path.exists():
             sys.exit(
-                f"mirrors-pyright: {label} not found at {path}\n"
-                "This install is missing its vendored assets - reinstall mirrors-pyright, "
-                "or file a bug at https://github.com/mxr/mirrors-pyright/issues"
+                f"pyright-pre-commit: {label} not found at {path}\n"
+                "This install is missing its vendored assets - reinstall pyright-pre-commit, "
+                "or file a bug at https://github.com/mxr/pyright-pre-commit/issues"
             )
 
     argv = [str(node), str(pyright_entry), *sys.argv[1:]]

@@ -1,6 +1,6 @@
 """Extends the setuptools build with a step that vendors Node.js + pyright
 into the wheel being built, for the platform actually doing the build (see
-mirrors_pyright/_fetch.py for why that's the right place to do this).
+pyright_pre_commit/_fetch.py for why that's the right place to do this).
 """
 
 from __future__ import annotations
@@ -22,10 +22,10 @@ class build_py(_build_py):
     def run(self) -> None:
         super().run()
         sys.path.insert(0, str(Path(__file__).parent))
-        from mirrors_pyright import __version__
-        from mirrors_pyright._fetch import fetch_vendor
+        from pyright_pre_commit import __version__
+        from pyright_pre_commit._fetch import fetch_vendor
 
-        vendor_dir = Path(self.build_lib) / "mirrors_pyright" / "_vendor"
+        vendor_dir = Path(self.build_lib) / "pyright_pre_commit" / "_vendor"
         fetch_vendor(vendor_dir, pyright_version=__version__)
 
 

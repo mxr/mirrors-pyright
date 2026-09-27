@@ -19,7 +19,7 @@ jobs:
     - name: Check for new pyright version
       id: check
       run: |
-        current="$(grep -oP '__version__ = "\K[^"]+' mirrors_pyright/__init__.py)"
+        current="$(grep -oP '__version__ = "\K[^"]+' pyright_pre_commit/__init__.py)"
         latest="$(curl -sSf https://registry.npmjs.org/pyright/latest | jq -r .version)"
         echo "current=$current" >> "$GITHUB_OUTPUT"
         echo "latest=$latest" >> "$GITHUB_OUTPUT"
@@ -33,10 +33,10 @@ jobs:
         LATEST: ${{ steps.check.outputs.latest }}
         GH_TOKEN: ${{ secrets.MIRROR_PUSH_TOKEN }}
       run: |
-        sed -i "s/__version__ = \"$CURRENT\"/__version__ = \"$LATEST\"/" mirrors_pyright/__init__.py
+        sed -i "s/__version__ = \"$CURRENT\"/__version__ = \"$LATEST\"/" pyright_pre_commit/__init__.py
         git config user.name 'Github Actions'
         git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-        git commit mirrors_pyright/__init__.py -m "pyright $LATEST"
+        git commit pyright_pre_commit/__init__.py -m "pyright $LATEST"
         git tag "v$LATEST"
         git remote set-url origin "https://x-access-token:$GH_TOKEN@github.com/$GITHUB_REPOSITORY"
         git push origin HEAD:refs/heads/main --tags
