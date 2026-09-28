@@ -40,6 +40,11 @@ repos:
   rev: 917816f768b32cc3aabd877e48b9001e7bf1b35c  # frozen: v1.1.414
   hooks:
   - id: pyright
+    additional_dependencies:
+    - coverage
+    - pytest
+    - types-setuptools
+    - typing_extensions; python_version < '3.12'
 - repo: https://github.com/mxr/sync-typing-deps
   rev: fc38ded36eb5fcf5a9f1147d46b28d80761ac427  # frozen: v0.7.1
   hooks:
