@@ -41,7 +41,7 @@ repos:
   hooks:
   - id: pyright
 - repo: https://github.com/mxr/sync-typing-deps
-  rev: 896a112838d434d8e607d4d636323c5914ab933f  # frozen: v0.7.0
+  rev: fc38ded36eb5fcf5a9f1147d46b28d80761ac427  # frozen: v0.7.1
   hooks:
   - id: sync-typing-deps
 - repo: https://github.com/pre-commit/mirrors-mypy
