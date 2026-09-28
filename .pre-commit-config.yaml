@@ -18,27 +18,28 @@ repos:
   hooks:
   - id: mdformat
     args: [--number, --wrap, '120']
-    additional_dependencies: [mdformat-gfm]
+    additional_dependencies: [mdformat-footnote, mdformat-gfm, mdformat-gfm-alerts]
 - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
   rev: 4380fbb73a154b5f5624794c1c78d9719ccc860f  # frozen: v2.16.0
   hooks:
   - id: pretty-format-toml
     args: [--autofix, --trailing-commas]
+    exclude: ^(uv\.lock)$
   - id: pretty-format-yaml
     args: [--autofix]
-- repo: https://github.com/mxr/pyright-pre-commit
-  rev: 917816f768b32cc3aabd877e48b9001e7bf1b35c  # frozen: v1.1.414
+- repo: https://github.com/mxr/mirrors-ty
+  rev: 247350e02d5017e6936ece7b0c05f936c6aef207  # frozen: v0.0.82
   hooks:
-  - id: pyright
+  - id: ty
     additional_dependencies:
     - coverage
     - pytest
     - types-setuptools
     - typing_extensions; python_version < '3.12'
-- repo: https://github.com/mxr/mirrors-ty
-  rev: 247350e02d5017e6936ece7b0c05f936c6aef207  # frozen: v0.0.82
+- repo: https://github.com/mxr/pyright-pre-commit
+  rev: 917816f768b32cc3aabd877e48b9001e7bf1b35c  # frozen: v1.1.414
   hooks:
-  - id: ty
+  - id: pyright
     additional_dependencies:
     - coverage
     - pytest
